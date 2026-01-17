@@ -9,11 +9,17 @@ https://docs.djangoproject.com/en/5.2/topcs/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+is_env_loaded = load_dotenv(BASE_DIR / '.env')
+
+if not is_env_loaded:
+    raise RuntimeError('.env file must exists')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/dieployment/checklist/
@@ -87,11 +93,11 @@ WSGI_APPLICATION = 'linkeer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'linkeer',
-        'USER': 'linkeer',
-        'PASSWORD': 'linkeer',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ['DB_DATABASE'],
+        'USER': os.environ['DB_USERNAME'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
