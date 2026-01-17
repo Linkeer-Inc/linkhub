@@ -8,15 +8,12 @@ class Tenant(TenantMixin):
         default=uuid.uuid4,
         editable=False
     )
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,unique=True)
     is_primary = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
     
     auto_drop_schema = False
-    
-    def __str__(self):
-        return self.name
 
 class TenantDomain(DomainMixin):
     pass
