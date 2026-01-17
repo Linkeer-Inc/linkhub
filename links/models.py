@@ -8,10 +8,10 @@ class Tenant(TenantMixin):
         default=uuid.uuid4,
         editable=False
     )
-    name = models.CharField(max_length=100,unique=True)
-    is_primary = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    created_on = models.DateField(auto_now_add=True)
+    name = models.CharField(max_length=100,unique=True,null=False)
+    is_primary = models.BooleanField(default=False,null=False)
+    is_active = models.BooleanField(default=True,null=False)
+    created_on = models.DateField(auto_now_add=True,null=False)
     
     auto_drop_schema = False
 
