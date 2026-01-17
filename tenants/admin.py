@@ -1,8 +1,8 @@
 from django.contrib import admin
-from links.models import Tenant, TenantDomain
+from tenants.models import Tenant, TenantDomain
 
 @admin.register(Tenant)
-class ClientAdmin(admin.ModelAdmin):
+class TenantsAdmin(admin.ModelAdmin):
     list_display = ['name', 'schema_name', 'created_on', 'is_active']
     search_fields = ['name', 'schema_name']
 

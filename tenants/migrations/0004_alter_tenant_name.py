@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('links', '0003_tenant_is_active'),
+        ('tenants', '0003_tenant_is_active'),
     ]
 
     operations = [

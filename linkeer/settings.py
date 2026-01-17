@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 SHARED_APPS = [
-    'links',
+    'tenants',
     'django_tenants',
     'django.contrib.contenttypes',
     'django.contrib.auth',
@@ -46,7 +46,6 @@ SHARED_APPS = [
 ]
 
 TENANT_APPS = [
-    'links',
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -58,7 +57,7 @@ TENANT_APPS = [
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
 MIDDLEWARE = [
-    'links.middleware.TenantMiddleware',
+    'tenants.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,9 +139,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TENANT_MODEL = 'links.Tenant'
+TENANT_MODEL = 'tenants.Tenant'
 
-TENANT_DOMAIN_MODEL = 'links.TenantDomain'
+TENANT_DOMAIN_MODEL = 'tenants.TenantDomain'
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
