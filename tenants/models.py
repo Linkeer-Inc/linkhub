@@ -2,6 +2,9 @@ import uuid
 from django.db import models
 from django_tenants.models import TenantMixin, DomainMixin
 
+class TenantDomain(DomainMixin):
+    created_on = models.DateTimeField(auto_now_add=True,null=False)
+
 class Tenant(TenantMixin):
     id = models.UUIDField(
         primary_key=True,
@@ -14,6 +17,3 @@ class Tenant(TenantMixin):
     created_on = models.DateField(auto_now_add=True,null=False)
     
     auto_drop_schema = False
-
-class TenantDomain(DomainMixin):
-    pass

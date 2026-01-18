@@ -1,0 +1,30 @@
+import uuid
+from django.db import models
+
+from tenants.models import TenantDomain
+
+class ActiveLinksManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+class Link(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    domain = models.ForeignKey(
+        TenantDomain,
+        on_delete=models.PROTECT,
+        related_name="links"
+    )
+    name = models.CharField(max_length=100,unique=True,null=False)
+    url = models.URLField(null=False)
+    is_active = models.BooleanField(default=True,null=False)
+    created_on = models.DateField(auto_now_add=True,null=False)
+
+    objects = ActiveLinksManager()
+    all_objects = models.Manager()
+
+    def __str__(self):
+        return self.name

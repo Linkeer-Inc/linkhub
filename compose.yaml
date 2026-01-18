@@ -12,6 +12,17 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  
+  app:
+    build:
+      dockerfile: dockerfile
+  env_file:
+    - .env
+  command: "python manage.py runserver"
+  ports:
+    - "8000:8000"
+  depends_on:
+    - db
 
   pgadmin:
     image: dpage/pgadmin4:latest

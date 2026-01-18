@@ -1,0 +1,19 @@
+<html>
+  <body>
+    {{ tenant.name }} <br />
+    {{ tenant.created_on }} {% for domain in tenant.domains.all %}
+    <h3>{{ domain.domain }}</h3>
+
+    <ul>
+      {% for link in domain.links.all %}
+      <li>
+        <a href="{{ link.url }}" target="_blank">{{link.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% empty %}
+    <p>Este tenant não possui domínios.</p>
+    {% endfor %}
+  </body>
+</html>
