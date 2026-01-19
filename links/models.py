@@ -1,4 +1,5 @@
 import uuid
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from tenants.models import TenantDomain
@@ -21,10 +22,19 @@ class Link(models.Model):
     name = models.CharField(max_length=100,unique=True,null=False)
     url = models.URLField(null=False)
     is_active = models.BooleanField(default=True,null=False)
+    exibition_order = models.PositiveBigIntegerField(
+        validators=[MinValueValidator(1)],
+        null=False
+    )
     created_on = models.DateField(auto_now_add=True,null=False)
 
     objects = ActiveLinksManager()
     all_objects = models.Manager()
 
-    def __str__(self):
-        return self.name
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['domain', 'exibition_order'],
+                name='unique_exibition_order_per_domain'
+            )
+        ]

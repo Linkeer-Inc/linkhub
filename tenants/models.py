@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from django.db.models import Q
+from django_tenants.utils import get_public_schema_name
 from django_tenants.models import TenantMixin, DomainMixin
 
 class TenantDomain(DomainMixin):
@@ -17,3 +19,12 @@ class Tenant(TenantMixin):
     created_on = models.DateField(auto_now_add=True,null=False)
     
     auto_drop_schema = False
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['schema_name'],
+                condition=Q(schema_name=get_public_schema_name()),
+                name='unique_public_schema'
+            )
+        ]
