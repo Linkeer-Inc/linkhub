@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Perfil de Links com Fundo Azul</title>
+    <title>{{ tenant.name }} - LinkHub</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
@@ -42,7 +42,7 @@
         font-family: "Inter", sans-serif;
       }
       .bg-gradient-blue {
-        background: linear-gradient(135deg, #137fec 0%, #0a4d91 100%);
+        background: linear-gradient(135deg, #021b33 0%, #0a4d91 100%);
       }
     </style>
   </head>
@@ -77,8 +77,7 @@
               <p
                 class="text-blue-100 text-base font-normal leading-relaxed max-w-[400px] mx-auto font-display"
               >
-                Transformando ideias em realidade digital. Confira nossos
-                principais canais e serviços abaixo.
+                {{ tenant.description }}
               </p>
             </div>
             <div class="flex flex-col gap-4 w-full">
