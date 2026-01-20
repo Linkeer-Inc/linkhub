@@ -1,4 +1,5 @@
 import uuid
+
 from django.db import models
 from django.db.models import Q
 from django_tenants.utils import get_public_schema_name
