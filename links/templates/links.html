@@ -41,13 +41,10 @@
       body {
         font-family: "Inter", sans-serif;
       }
-      .bg-gradient-blue {
-        background: linear-gradient(135deg, #021b33 0%, #0a4d91 100%);
-      }
     </style>
   </head>
   <body
-    class="bg-gradient-blue min-h-screen text-white transition-colors duration-200"
+    class="bg-gradient-to-br from-[{{ tenant.primary_color }}] to-[#021b33]/80 min-h-screen text-white transition-colors duration-200"
   >
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <div class="layout-container flex h-full grow flex-col">
@@ -94,7 +91,7 @@
               </a>
               {% empty %}
               <p class="text-center">
-                Oppss... {{tenant.name}} ainda não possui links.
+                Oppss... {{ tenant.name }} ainda não possui links.
               </p>
               {% endfor %}
             </div>

@@ -18,7 +18,8 @@ class Tenant(TenantMixin):
     is_primary = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
-    
+    primary_color = models.CharField(max_length=40)
+
     auto_drop_schema = False
 
     class Meta:
