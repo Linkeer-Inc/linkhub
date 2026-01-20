@@ -37,7 +37,8 @@ ALLOWED_HOSTS = ['*']
 SHARED_APPS = [
     'django_tenants',  
 
-    'tenants',         
+    'tenants',    
+    'links',     
 
     'django.contrib.contenttypes',
     'django.contrib.auth',
@@ -48,7 +49,7 @@ SHARED_APPS = [
 ]
 
 TENANT_APPS = [
-    'links'
+    'django_tenants'
 ]
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -64,7 +65,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'linkhub.urls'
+PUBLIC_SCHEMA_URLCONF = 'linkhub.central_urls'
+
+ROOT_URLCONF = 'linkhub.tenant_urls'
 
 TEMPLATES = [
     {
