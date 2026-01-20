@@ -3,7 +3,7 @@ from .models import Tenant, TenantDomain
 
 @admin.register(Tenant)
 class TenantsAdmin(admin.ModelAdmin):
-    list_display = ['name', 'schema_name', 'created_on', 'is_active']
+    list_display = ['name', 'schema_name', 'created_on', 'is_active', 'description']
     search_fields = ['name', 'schema_name']
 
 @admin.register(TenantDomain)
