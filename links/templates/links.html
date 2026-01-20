@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="light" lang="pt-BR">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -15,7 +15,6 @@
     />
     <script id="tailwind-config">
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
             colors: {
@@ -56,13 +55,11 @@
               <div
                 class="w-24 h-24 rounded-full border-4 border-white/20 bg-white p-1 shadow-xl overflow-hidden flex items-center justify-center"
               >
-                <div
-                  class="w-full h-full bg-center bg-no-repeat bg-cover rounded-full"
-                  data-alt="Logotipo da empresa"
-                  style="
-                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuArWZTFI6HeDQjDkI12DiXCQEtn77xAa0RBNBZbz3nFlM9palfbYZ9fJhZkvAswIBtU0l2X58p2eagDTOcbf-uPC1sY23Bq6-ErLBuDIf4886MTQ7FqELjS3-fkidTNDYgxHAUhwgcEDezZTOZRLk8AflY9Kg5ehvYHv1V0kwfNqhEAWTvv33UEAKszy52QxDQqegNVf4Y9H0MC0CRuQKJcJ4U0uULacpO054HYrGjuDVc7947ZeFvdZpWEcTFpqTP2c0x0ftOL8UQ&quot;);
-                  "
-                ></div>
+                <img
+                  class="w-full h-full object-center rounded-full"
+                  alt="Logotipo de {{ tenant.name }}"
+                  src="{{ MEDIA_URL }}{{tenant.branding_icon}}"
+                />
               </div>
             </div>
             <div class="text-center mb-10">
@@ -72,7 +69,7 @@
                 {{ tenant.name }}
               </h1>
               <p
-                class="text-blue-100 text-base font-normal leading-relaxed max-w-[400px] mx-auto font-display"
+                class="text-white text-base font-normal leading-relaxed max-w-[400px] mx-auto font-display"
               >
                 {{ tenant.description }}
               </p>
@@ -85,7 +82,7 @@
                 href="{{ link.url }}"
               >
                 <span
-                  class="text-white text-base font-semibold leading-normal group-hover:text-primary transition-colors"
+                  class="text-white text-base font-semibold leading-normal group-hover:text-black transition-colors"
                   >{{ link.name }}</span
                 >
               </a>
