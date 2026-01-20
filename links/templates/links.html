@@ -1,17 +1,12 @@
 <!doctype html>
-
 <html class="light" lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>{{tenant.name}} - LinkHub</title>
+    <title>Perfil de Links com Fundo Azul</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
     <link
@@ -25,6 +20,7 @@
           extend: {
             colors: {
               primary: "#137fec",
+              "primary-dark": "#0d5fb1",
               "background-light": "#f6f7f8",
               "background-dark": "#101922",
             },
@@ -41,14 +37,17 @@
         },
       };
     </script>
-    <style>
+    <style type="text/tailwindcss">
       body {
         font-family: "Inter", sans-serif;
+      }
+      .bg-gradient-blue {
+        background: linear-gradient(135deg, #137fec 0%, #0a4d91 100%);
       }
     </style>
   </head>
   <body
-    class="bg-white dark:bg-background-dark text-[#111418] dark:text-white transition-colors duration-200"
+    class="bg-gradient-blue min-h-screen text-white transition-colors duration-200"
   >
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <div class="layout-container flex h-full grow flex-col">
@@ -58,11 +57,11 @@
           >
             <div class="mb-6">
               <div
-                class="w-20 h-20 rounded-full border-2 border-primary/10 bg-white p-1 shadow-sm overflow-hidden flex items-center justify-center"
+                class="w-24 h-24 rounded-full border-4 border-white/20 bg-white p-1 shadow-xl overflow-hidden flex items-center justify-center"
               >
                 <div
                   class="w-full h-full bg-center bg-no-repeat bg-cover rounded-full"
-                  data-alt="Logotipo minimalista da empresa circular"
+                  data-alt="Logotipo da empresa"
                   style="
                     background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuArWZTFI6HeDQjDkI12DiXCQEtn77xAa0RBNBZbz3nFlM9palfbYZ9fJhZkvAswIBtU0l2X58p2eagDTOcbf-uPC1sY23Bq6-ErLBuDIf4886MTQ7FqELjS3-fkidTNDYgxHAUhwgcEDezZTOZRLk8AflY9Kg5ehvYHv1V0kwfNqhEAWTvv33UEAKszy52QxDQqegNVf4Y9H0MC0CRuQKJcJ4U0uULacpO054HYrGjuDVc7947ZeFvdZpWEcTFpqTP2c0x0ftOL8UQ&quot;);
                   "
@@ -71,28 +70,27 @@
             </div>
             <div class="text-center mb-10">
               <h1
-                class="text-[#111418] dark:text-white tracking-tight text-3xl font-bold leading-tight pb-2 font-display"
+                class="text-white tracking-tight text-3xl font-bold leading-tight pb-2 font-display"
               >
                 {{ tenant.name }}
               </h1>
               <p
-                class="text-[#617589] dark:text-gray-400 text-base font-normal leading-relaxed max-w-[400px] mx-auto font-display"
+                class="text-blue-100 text-base font-normal leading-relaxed max-w-[400px] mx-auto font-display"
               >
                 Transformando ideias em realidade digital. Confira nossos
                 principais canais e serviços abaixo.
               </p>
             </div>
-
             <div class="flex flex-col gap-4 w-full">
               {% for link in domain.links.all %}
               <a
+                class="group flex min-h-[60px] w-full cursor-pointer items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 transition-all hover:bg-white hover:border-white active:scale-[0.98] shadow-sm"
                 target="_blank"
-                class="group flex min-h-[56px] w-full cursor-pointer items-center justify-center rounded-xl border border-[#e5e7eb] dark:border-gray-700 bg-white dark:bg-background-dark px-6 py-3 transition-all hover:border-primary hover:bg-primary/5 active:scale-[0.98]"
-                href="{{link.url}}"
+                href="{{ link.url }}"
               >
                 <span
-                  class="text-[#111418] dark:text-white text-base font-medium leading-normal group-hover:text-primary transition-colors"
-                  >{{link.name}}</span
+                  class="text-white text-base font-semibold leading-normal group-hover:text-primary transition-colors"
+                  >{{ link.name }}</span
                 >
               </a>
               {% empty %}
@@ -101,47 +99,45 @@
               </p>
               {% endfor %}
             </div>
-
-            <div class="flex gap-6 mt-12 mb-8">
+            <div class="flex gap-8 mt-12 mb-8">
               <a
-                class="text-[#617589] hover:text-primary transition-colors"
+                class="text-white/80 hover:text-white transition-colors transform hover:scale-110"
                 href="#"
               >
                 <span
-                  class="material-symbols-outlined text-2xl"
+                  class="material-symbols-outlined text-3xl"
                   data-icon="language"
                   >public</span
                 >
               </a>
               <a
-                class="text-[#617589] hover:text-primary transition-colors"
+                class="text-white/80 hover:text-white transition-colors transform hover:scale-110"
                 href="#"
               >
                 <span
-                  class="material-symbols-outlined text-2xl"
+                  class="material-symbols-outlined text-3xl"
                   data-icon="mail"
                   >mail</span
                 >
               </a>
               <a
-                class="text-[#617589] hover:text-primary transition-colors"
+                class="text-white/80 hover:text-white transition-colors transform hover:scale-110"
                 href="#"
               >
                 <span
-                  class="material-symbols-outlined text-2xl"
+                  class="material-symbols-outlined text-3xl"
                   data-icon="smartphone"
                   >smartphone</span
                 >
               </a>
             </div>
-
             <div class="mt-auto pt-8">
               <p
-                class="text-[#9ca3af] text-xs font-normal tracking-wide uppercase px-4 text-center"
+                class="text-white/60 text-xs font-normal tracking-wide uppercase px-4 text-center"
               >
-                Construído com
+                Criado Por
                 <a
-                  class="underline hover:text-primary transition-colors font-semibold"
+                  class="underline hover:text-white transition-colors font-semibold"
                   href="#"
                   >LinkHub</a
                 >

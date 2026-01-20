@@ -19,14 +19,14 @@ class Link(models.Model):
         on_delete=models.PROTECT,
         related_name="links"
     )
-    name = models.CharField(max_length=100,unique=True,null=False)
-    url = models.URLField(null=False)
-    is_active = models.BooleanField(default=True,null=False)
+    name = models.CharField(max_length=100,unique=True)
+    url = models.URLField()
+    is_active = models.BooleanField(default=True)
     exibition_order = models.PositiveBigIntegerField(
         validators=[MinValueValidator(1)],
         null=False
     )
-    created_on = models.DateField(auto_now_add=True,null=False)
+    created_on = models.DateField(auto_now_add=True)
 
     objects = ActiveLinksManager()
     all_objects = models.Manager()

@@ -5,7 +5,7 @@ from django_tenants.utils import get_public_schema_name
 from django_tenants.models import TenantMixin, DomainMixin
 
 class TenantDomain(DomainMixin):
-    created_on = models.DateTimeField(auto_now_add=True,null=False)
+    created_on = models.DateTimeField(auto_now_add=True)
 
 class Tenant(TenantMixin):
     id = models.UUIDField(
@@ -13,10 +13,11 @@ class Tenant(TenantMixin):
         default=uuid.uuid4,
         editable=False
     )
-    name = models.CharField(max_length=100,unique=True,null=False)
-    is_primary = models.BooleanField(default=False,null=False)
-    is_active = models.BooleanField(default=True,null=False)
-    created_on = models.DateField(auto_now_add=True,null=False)
+    name = models.CharField(max_length=100,unique=True)
+    description = models.CharField(max_length=100)
+    is_primary = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    created_on = models.DateField(auto_now_add=True)
     
     auto_drop_schema = False
 
