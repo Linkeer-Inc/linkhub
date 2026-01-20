@@ -11,6 +11,9 @@ class TenantModelForm(forms.ModelForm):
     class Meta:
         model = Tenant
         fields = '__all__'
+        widgets = {
+            'primary_color': forms.TextInput(attrs={'type': 'color'})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
