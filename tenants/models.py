@@ -22,7 +22,7 @@ class Tenant(TenantMixin):
     is_primary = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
-    branding_icon = models.FileField(upload_to=tenant_branding_upload_to,null=True,blank=True)
+    branding_icon = models.ImageField(upload_to=tenant_branding_upload_to,null=True,blank=True)
     primary_color = models.CharField(max_length=40)
 
     auto_drop_schema = False
