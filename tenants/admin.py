@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tenants.models import Tenant, TenantDomain
+from .models import Tenant, TenantDomain
 
 @admin.register(Tenant)
 class TenantsAdmin(admin.ModelAdmin):

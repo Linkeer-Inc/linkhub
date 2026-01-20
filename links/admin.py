@@ -1,5 +1,5 @@
 from django.contrib import admin
-from links.models import Link
+from .models import Link
 
 @admin.register(Link)
 class LinksAdmin(admin.ModelAdmin):
