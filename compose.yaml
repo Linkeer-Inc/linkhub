@@ -20,6 +20,10 @@ services:
     env_file:
       - .env
     command: 'sh -c "
+      sleep 10 && 
+      python3 manage.py migrate && 
+      python3 manage.py setup_tenants &&
+      python3 manage.py createsuperuser --no-input --username=${ADMIN_USERNAME} --email=${ADMIN_EMAIL} || true &&
       python3 manage.py runserver 0.0.0.0:8000
     "'
     volumes:
