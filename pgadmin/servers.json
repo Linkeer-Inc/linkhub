@@ -1,0 +1,16 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Linkeer PostgreSQL",
+      "Group": "Servers",
+      "Host": "db",
+      "Port": 5432,
+      "MaintenanceDB": "linkeer",
+      "Username": "linkeer",
+      "Password": "linkeer",
+      "SSLMode": "prefer",
+      "ConnectNow": true,
+      "Comment": "Conexão automática baseada no .env"
+    }
+  }
+}
