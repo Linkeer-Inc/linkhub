@@ -1,7 +1,6 @@
 from os import environ
 from django.http.request import split_domain_port
 
-
 def tenant(request):
     try:
         domainFromRequest, _ = split_domain_port(request.get_host())
