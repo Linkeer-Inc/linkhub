@@ -16,6 +16,6 @@ class Command(BaseCommand):
                 LinkCategory(name="Outros"),
             ]
 
-            LinkCategory.objects.bulk_create(linkCategories)
+            LinkCategory.objects.bulk_create(linkCategories,ignore_conflicts=True)
         except RuntimeError:
             print("Skipping link categories initialization...")

@@ -9,6 +9,7 @@ from .validators import validate_file_extension, validate_file_size
 
 class TenantDomain(DomainMixin):
     created_on = models.DateTimeField(auto_now_add=True)
+    is_primary = models.BooleanField(default=False)
 
 def tenant_branding_upload_to(instance, filename):
     return f"tenants/{instance.id}/branding/{filename}"
@@ -22,6 +23,7 @@ class Tenant(TenantMixin):
     name = models.CharField(max_length=100,unique=True)
     description = models.CharField(max_length=100,null=True)
     is_active = models.BooleanField(default=True)
+    is_primary = models.BooleanField(default=False)
     created_on = models.DateField(auto_now_add=True)
     branding_icon = models.ImageField(
         upload_to=tenant_branding_upload_to,

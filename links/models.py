@@ -31,7 +31,7 @@ class Link(models.Model):
     domain = models.ForeignKey(
         TenantDomain,
         on_delete=models.PROTECT,
-        related_name="links"
+        related_name="links_tenant_domain"
     )
     category = models.ForeignKey(
         LinkCategory,

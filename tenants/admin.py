@@ -22,10 +22,10 @@ class TenantModelForm(forms.ModelForm):
 @admin.register(Tenant)
 class TenantsAdmin(admin.ModelAdmin):
     form = TenantModelForm
-    list_display = ['name', 'schema_name', 'created_on', 'is_active', 'description', 'primary_color']
+    list_display = ['name', 'schema_name', 'created_on', 'is_primary', 'is_active', 'description', 'primary_color']
     search_fields = ['name', 'schema_name']
 
 @admin.register(TenantDomain)
-class DomainAdmin(admin.ModelAdmin):
+class TenantDomainAdmin(admin.ModelAdmin):
     list_display = ['domain', 'tenant']
     search_fields = ['domain', 'tenant']

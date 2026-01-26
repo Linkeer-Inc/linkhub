@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Link, LinkCategory
 
+from tenants.models import TenantDomain
+
 @admin.register(Link)
 class LinksAdmin(admin.ModelAdmin):
     list_display = ['name', 'url', 'is_active']
@@ -13,3 +15,10 @@ class LinksAdmin(admin.ModelAdmin):
 class LinksAdmin(admin.ModelAdmin):
     list_display = ['name']
     search_fields = ['name']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "domain":
+            kwargs["queryset"] = TenantDomain.objects.exclude(
+                is_primary=True
+            )
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
