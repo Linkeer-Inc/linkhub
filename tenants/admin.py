@@ -27,6 +27,5 @@ class TenantsAdmin(admin.ModelAdmin):
 
 @admin.register(TenantDomain)
 class DomainAdmin(admin.ModelAdmin):
-    list_display = ['domain', 'tenant', 'is_primary']
-    list_filter = ['is_primary']
-    search_fields = ['tenant_domain']
+    list_display = ['domain', 'tenant']
+    search_fields = ['domain', 'tenant']

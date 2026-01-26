@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Link
+from .models import Link, LinkCategory
 
 @admin.register(Link)
 class LinksAdmin(admin.ModelAdmin):
@@ -8,3 +8,8 @@ class LinksAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return Link.all_objects.all()
+    
+@admin.register(LinkCategory)
+class LinksAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
