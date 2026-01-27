@@ -44,87 +44,112 @@
       body {
         font-family: "Inter", sans-serif;
       }
+      
+      @layer components {
+        .card-link {
+          @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-white/30 hover:shadow-2xl hover:shadow-primary/20;
+        }
+        
+        .card-link:hover {
+          @apply bg-gradient-to-br from-white/10 to-white/5;
+        }
+      }
     </style>
   </head>
   <body
-    class="bg-gradient-to-br from-[{{ tenant.primary_color }}] to-[#021b33]/80 min-h-screen text-white transition-colors duration-200"
+    class="bg-gradient-to-br from-[{{ tenant.primary_color }}]/90 via-slate-900 to-black min-h-screen text-white transition-colors duration-200"
   >
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <div class="layout-container flex h-full grow flex-col">
-        <main class="flex flex-1 justify-center py-12 px-6">
+        <main class="flex flex-1 justify-center py-16 md:py-24 px-4 md:px-6">
           <div
-            class="layout-content-container flex flex-col max-w-[520px] w-full items-center"
+            class="layout-content-container flex flex-col max-w-[600px] w-full items-center"
           >
-            <div class="mb-6">
+            <div class="mb-16">
               <div
-                class="w-24 h-24 rounded-full border-4 border-white/20 bg-white p-1 shadow-xl overflow-hidden flex items-center justify-center"
+                class="w-20 h-20 md:w-24 md:h-24 rounded-2xl border border-emerald-500/60 bg-white shadow-lg shadow-emerald-500/20 overflow-hidden flex items-center justify-center backdrop-blur-md"
               >
                 <img
-                  class="w-full h-full object-center rounded-full"
+                  class="w-4/5 h-4/5 object-contain"
                   alt="Logotipo de {{ tenant.name }}"
                   src="{{ MEDIA_URL }}{{tenant.branding_icon}}"
                 />
               </div>
             </div>
-            <div class="text-center mb-10">
+
+            <div class="text-center mb-14">
               <h1
-                class="text-white tracking-tight text-3xl font-bold leading-tight pb-2 font-display"
+                class="text-white tracking-tighter text-3xl md:text-4xl font-black leading-tight pb-4 font-display drop-shadow-lg"
               >
                 {{ tenant.name }}
               </h1>
               <p
-                class="text-white text-base font-normal leading-relaxed max-w-[400px] mx-auto font-display"
+                class="text-white/60 text-base md:text-lg font-normal leading-relaxed max-w-[450px] mx-auto font-display"
               >
                 {{ tenant.description }}
               </p>
             </div>
-            <div class="flex flex-col gap-4 w-full">
+
+            {% if domain.links.all %}
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
               {% for link in domain.links.all %}
               <a
-                class="group flex min-h-[60px] w-full cursor-pointer items-center gap-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 transition-all hover:bg-white hover:border-white active:scale-[0.98] shadow-sm"
-                target="_blank"
                 href="{{ link.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="card-link group
+                {% if forloop.counter <= 2 %}
+                  lg:col-span-1 row-span-2
+                {% endif %}
+                p-8 flex flex-col items-center justify-start text-center min-h-[240px] sm:min-h-[280px]"
               >
-                <i
-                  class="text-2xl text-white group-hover:text-black transition-colors flex-shrink-0
-                  {% if link.category.name == "Instagram" %}
-                    fab fa-instagram
-                  {% elif link.category.name == "WhatsApp" %}
-                    fab fa-whatsapp
-                  {% elif link.category.name == "Site" %}
-                    fas fa-globe
-                  {% elif link.category.name == "Linkedin" %}
-                    fab fa-linkedin
-                  {% elif link.category.name == "YouTube" %}
-                    fab fa-youtube
-                  {% else %}
-                    fas fa-link
-                  {% endif %}
-                  "
-                ></i>
-                <span
-                  class="text-white text-base font-semibold leading-normal group-hover:text-black transition-colors flex-1"
-                  >{{ link.name }}</span
-                >
-                <i class="fas fa-arrow-up-right text-lg text-white group-hover:text-black transition-colors opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 duration-200 flex-shrink-0"></i>
+                <div class="relative z-10 flex flex-col items-center gap-4 w-full">
+                  <div class="flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-[{{ tenant.primary_color }}]/25 to-[{{ tenant.primary_color }}]/10 border border-[{{ tenant.primary_color }}]/40 group-hover:from-[{{ tenant.primary_color }}]/40 group-hover:to-[{{ tenant.primary_color }}]/20 group-hover:border-[{{ tenant.primary_color }}]/70 transition-all duration-500 shadow-lg shadow-[{{ tenant.primary_color }}]/15 group-hover:shadow-[{{ tenant.primary_color }}]/30">
+                    <i
+                      class="text-4xl text-white drop-shadow-lg transition-all duration-500 filter brightness-110
+                      {% if link.category.name == "Instagram" %}
+                        fab fa-instagram
+                      {% elif link.category.name == "WhatsApp" %}
+                        fab fa-whatsapp
+                      {% elif link.category.name == "Site" %}
+                        fas fa-globe
+                      {% elif link.category.name == "Linkedin" %}
+                        fab fa-linkedin
+                      {% elif link.category.name == "YouTube" %}
+                        fab fa-youtube
+                      {% else %}
+                        fas fa-link
+                      {% endif %}
+                      "
+                    ></i>
+                  </div>
+                
+                  <div class="flex-1">
+                    <h3 class="text-white text-lg font-bold leading-snug mb-2 transition-colors duration-300 drop-shadow-md">
+                      {{ link.name }}
+                    </h3>
+                    <p class="text-white/70 text-sm font-normal drop-shadow-sm">
+                      {{ link.category.name }}
+                    </p>
+                  </div>
+                </div>
               </a>
-              {% empty %}
-              <p class="text-center">
-                Oppss... {{ tenant.name }} ainda não possui links.
-              </p>
               {% endfor %}
             </div>
-            <div class="mt-auto pt-8">
-              <p
-                class="text-white/60 text-xs font-normal tracking-wide uppercase px-4 text-center"
-              >
-                Criado Por
-                <a
-                  class="underline hover:text-white transition-colors font-semibold"
-                  href="#"
-                  >{{ APP_NAME }}</a
-                >
+            {% else %}
+            <div class="w-full py-16">
+              <p class="text-center text-white/40 text-lg">
+                Oppss... {{ tenant.name }} ainda não possui links.
               </p>
+            </div>
+            {% endif %}
+            <div class="mt-auto pt-10 border-t border-white/10 w-full">
+              <div class="flex flex-col items-center gap-4 text-center">
+                <p class="text-white/40 text-xs font-normal tracking-widest uppercase">
+                  Powered by
+                  <span class="font-semibold text-white/50 ml-1">{{ APP_NAME }}</span>
+                </p>
+              </div>
             </div>
           </div>
         </main>
