@@ -11,7 +11,12 @@ class LinksAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return Link.all_objects.all()
     
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'domain':
+            kwargs['queryset'] = TenantDomain.objects.exclude(domain='localhost')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    
 @admin.register(LinkCategory)
-class LinksAdmin(admin.ModelAdmin):
+class LinkCategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
     search_fields = ['name']

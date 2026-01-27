@@ -29,3 +29,4 @@ class TenantsAdmin(admin.ModelAdmin):
 class TenantDomainAdmin(admin.ModelAdmin):
     list_display = ['domain', 'tenant']
     search_fields = ['domain', 'tenant']
+    exclude = ['is_primary']
