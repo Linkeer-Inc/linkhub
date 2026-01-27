@@ -52,6 +52,10 @@
       html {
         scroll-behavior: smooth;
       }
+      .sun-icon,
+      .moon-icon {
+        transition: opacity 300ms ease-in-out;
+      }
     </style>
   </head>
   <body
@@ -434,6 +438,157 @@
           © {% now "Y" %} {{ APP_NAME }}. Todos os direitos reservados.
         </div>
       </footer>
+      <button
+        id="theme-toggle"
+        class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white shadow-2xl shadow-primary/40 hover:shadow-primary/60 hover:scale-110 active:scale-95 transition-all duration-300 backdrop-blur-md border border-white/20"
+        title="Alternar tema (light/dark)"
+        aria-label="Alternar tema"
+      >
+        <span class="material-symbols-outlined text-3xl sun-icon duration-300"
+          >light_mode</span
+        >
+        <span
+          class="material-symbols-outlined text-3xl moon-icon hidden duration-300"
+          >dark_mode</span
+        >
+      </button>
     </div>
+    <script>
+      const ThemeManager = (() => {
+        const CONFIG = {
+          storageKey: "theme",
+          darkClass: "dark",
+          themes: {
+            light: "light",
+            dark: "dark",
+          },
+        };
+
+        const elements = {
+          htmlElement: document.documentElement,
+          toggleButton: document.getElementById("theme-toggle"),
+          sunIcon: document.querySelector(".sun-icon"),
+          moonIcon: document.querySelector(".moon-icon"),
+        };
+
+        const systemThemeQuery = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        );
+
+        /**
+         * Retorna o tema atual do sistema operacional
+         * @returns {string} "dark" ou "light"
+         */
+        const getSystemTheme = () => {
+          return systemThemeQuery.matches
+            ? CONFIG.themes.dark
+            : CONFIG.themes.light;
+        };
+
+        /**
+         * Retorna o tema salvo no localStorage
+         * @returns {string|null} Tema salvo ou null
+         */
+        const getSavedTheme = () => {
+          return localStorage.getItem(CONFIG.storageKey);
+        };
+
+        /**
+         * Retorna o tema que deve ser aplicado
+         * Prioridade: localStorage > preferência do sistema
+         * @returns {string} Tema a ser aplicado
+         */
+        const getThemeToApply = () => {
+          const saved = getSavedTheme();
+          return saved ? saved : getSystemTheme();
+        };
+
+        /**
+         * Verifica se o tema escuro está ativo
+         * @returns {boolean}
+         */
+        const isDarkMode = () => {
+          return elements.htmlElement.classList.contains(CONFIG.darkClass);
+        };
+
+        /**
+         * Aplica um tema ao documento
+         * @param {string} theme - Tema a aplicar ("light" ou "dark")
+         */
+        const applyTheme = (theme) => {
+          const isDark = theme === CONFIG.themes.dark;
+          elements.htmlElement.classList.toggle(CONFIG.darkClass, isDark);
+        };
+
+        /**
+         * Atualiza a visibilidade dos ícones conforme o tema
+         * Mostra o ícone do PRÓXIMO modo (invertido)
+         * Se dark está ativo, mostra sol; se light está ativo, mostra lua
+         */
+        const updateIconsDisplay = () => {
+          const isDark = isDarkMode();
+
+          if (isDark) {
+            elements.sunIcon.classList.remove("hidden");
+            elements.moonIcon.classList.add("hidden");
+          } else {
+            elements.sunIcon.classList.add("hidden");
+            elements.moonIcon.classList.remove("hidden");
+          }
+        };
+
+        /**
+         * Alterna entre temas e persiste a escolha
+         */
+        const toggleTheme = () => {
+          const newTheme = isDarkMode()
+            ? CONFIG.themes.light
+            : CONFIG.themes.dark;
+
+          applyTheme(newTheme);
+
+          localStorage.setItem(CONFIG.storageKey, newTheme);
+
+          updateIconsDisplay();
+        };
+
+        /**
+         * Sincroniza com mudanças na preferência do sistema operacional
+         * Só funciona se o usuário não definiu uma preferência manual
+         */
+        const syncWithSystemPreference = (event) => {
+          if (!getSavedTheme()) {
+            const newTheme = event.matches
+              ? CONFIG.themes.dark
+              : CONFIG.themes.light;
+
+            applyTheme(newTheme);
+            updateIconsDisplay();
+          }
+        };
+
+        /**
+         * Inicializa o gerenciador de temas
+         */
+        const initialize = () => {
+          const theme = getThemeToApply();
+
+          applyTheme(theme);
+          updateIconsDisplay();
+
+          elements.toggleButton.addEventListener("click", toggleTheme);
+          systemThemeQuery.addEventListener("change", syncWithSystemPreference);
+        };
+
+        return {
+          initialize,
+          toggleTheme,
+          isDarkMode,
+          getThemeToApply,
+        };
+      })();
+
+      ThemeManager.initialize();
+    </script>
   </body>
 </html>
