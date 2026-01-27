@@ -36,7 +36,7 @@ class Link(models.Model):
     category = models.ForeignKey(
         LinkCategory,
         on_delete=models.CASCADE,
-        related_name="link_category",
+        related_name="category",
     )
     name = models.CharField(max_length=100,unique=True)
     url = models.URLField()

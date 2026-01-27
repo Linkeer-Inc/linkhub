@@ -13,6 +13,10 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script id="tailwind-config">
       tailwind.config = {
         theme: {
@@ -77,14 +81,32 @@
             <div class="flex flex-col gap-4 w-full">
               {% for link in domain.links.all %}
               <a
-                class="group flex min-h-[60px] w-full cursor-pointer items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 transition-all hover:bg-white hover:border-white active:scale-[0.98] shadow-sm"
+                class="group flex min-h-[60px] w-full cursor-pointer items-center gap-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 transition-all hover:bg-white hover:border-white active:scale-[0.98] shadow-sm"
                 target="_blank"
                 href="{{ link.url }}"
               >
+                <i
+                  class="text-2xl text-white group-hover:text-black transition-colors flex-shrink-0
+                  {% if link.category.name == "Instagram" %}
+                    fab fa-instagram
+                  {% elif link.category.name == "WhatsApp" %}
+                    fab fa-whatsapp
+                  {% elif link.category.name == "Site" %}
+                    fas fa-globe
+                  {% elif link.category.name == "Linkedin" %}
+                    fab fa-linkedin
+                  {% elif link.category.name == "YouTube" %}
+                    fab fa-youtube
+                  {% else %}
+                    fas fa-link
+                  {% endif %}
+                  "
+                ></i>
                 <span
-                  class="text-white text-base font-semibold leading-normal group-hover:text-black transition-colors"
+                  class="text-white text-base font-semibold leading-normal group-hover:text-black transition-colors flex-1"
                   >{{ link.name }}</span
                 >
+                <i class="fas fa-arrow-up-right text-lg text-white group-hover:text-black transition-colors opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 duration-200 flex-shrink-0"></i>
               </a>
               {% empty %}
               <p class="text-center">
