@@ -36,15 +36,18 @@ class Link(models.Model):
     category = models.ForeignKey(
         LinkCategory,
         on_delete=models.CASCADE,
+        null=True,
         related_name="category",
     )
     name = models.CharField(max_length=100,unique=True)
+    description=models.CharField(max_length=100,blank=True,default="")
     url = models.URLField()
     is_active = models.BooleanField(default=True)
     exibition_order = models.PositiveBigIntegerField(
         validators=[MinValueValidator(1)],
         null=False
     )
+    emphasis = models.BooleanField(default=False)
     created_on = models.DateField(auto_now_add=True)
 
     objects = ActiveLinksManager()
