@@ -5,10 +5,14 @@ def tenant(request):
     try:
         domainFromRequest, _ = split_domain_port(request.get_host())
         domain = request.tenant.domains.filter(domain=domainFromRequest).first()
+        links = domain.links.filter(emphasis=False)
+        links_with_emphasis = domain.links.filter(emphasis=True)
 
         return {
             "tenant": getattr(request, "tenant", None),
             "domain": domain,
+            "links": links,
+            "links_with_emphasis": links_with_emphasis,
             "APP_NAME": "LinkHub"
         }
     except:

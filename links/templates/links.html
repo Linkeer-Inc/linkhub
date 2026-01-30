@@ -126,49 +126,50 @@
           {{ tenant.description }}
         </p>
       </div>
-      <div class="dynamic-links-container">
-
-        {% for link in domain.links.all %}
-
-        {% if link.emphasis %}
-           <a
-          class="group glass-card block p-8 rounded-[2.5rem] relative overflow-hidden"
-          href="#"
-        >
-          <div
-            class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity"
-          >
-            <span class="material-symbols-outlined text-8xl">auto_awesome</span>
-          </div>
-          <div
-            class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8"
-          >
-            <div
-              class="p-5 rounded-3xl bg-violet-600/20 text-violet-400 feature-icon-glow border border-violet-500/20"
+        <div>
+            {% for emphasis_link in links_with_emphasis %}
+                    <a
+              class="group mb-8 glass-card block p-8 rounded-[2.5rem] relative overflow-hidden"
+              href="#"
             >
-              <span class="material-symbols-outlined text-5xl"
-                >rocket_launch</span
+              <div
+                class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity"
               >
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-2">
-                <h2 class="text-2xl font-bold">{{ link.name }}</h2>
-               
+                <span class="material-symbols-outlined text-8xl">auto_awesome</span>
               </div>
-              <p class="text-slate-400 leading-relaxed text-lg">
-                {{ link.description }}
-              </p>
-            </div>
-            <div class="hidden md:block">
-              <span
-                class="material-symbols-outlined text-slate-500 group-hover:text-white transition-colors"
-                >arrow_forward_ios</span
+              <div
+                class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8"
               >
-            </div>
-          </div>
-        </a>
+                <div
+                  class="p-5 rounded-3xl bg-violet-600/20 text-violet-400 feature-icon-glow border border-violet-500/20"
+                >
+                  <span class="material-symbols-outlined text-5xl"
+                    >rocket_launch</span
+                  >
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h2 class="text-2xl font-bold">{{ emphasis_link.name }}</h2>
+                  
+                  </div>
+                  <p class="text-slate-400 leading-relaxed text-lg">
+                    {{ emphasis_link.description }}
+                  </p>
+                </div>
+                <div class="hidden md:block">
+                  <span
+                    class="material-symbols-outlined text-slate-500 group-hover:text-white transition-colors"
+                    >arrow_forward_ios</span
+                  >
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+        </div>
 
-        {% else %}
+        <div class="dynamic-links-container">
+        {% for link in links %}
+
              <a
           target="_blank"
           class="group glass-card p-8 rounded-[2rem] flex flex-col gap-6"
@@ -200,8 +201,7 @@
               {{ link.description }}
             </p>
           </div>
-        </a>
-        {% endif %}     
+        </a>  
         {% endfor %}
       </div>
     </main>
