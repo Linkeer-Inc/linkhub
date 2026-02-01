@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 import links.views as tenantViews
 
 urlpatterns = [
-    path('', view=tenantViews.links, name='tenant.links')
+    path('', view=tenantViews.links, name='tenant.links'),
+    path('track-click/', view=tenantViews.track_click, name='tenant.track_click'),
 ]
 
 if settings.DEBUG:

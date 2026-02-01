@@ -169,42 +169,77 @@
 
         <div class="dynamic-links-container">
         {% for link in links %}
-
-             <a
-          target="_blank"
-          class="group glass-card p-8 rounded-[2rem] flex flex-col gap-6"
-          href="{{ link.url }}"
-        >
-          <div
-            class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors"
+          <a
+            target="_blank"
+            class="group glass-card p-8 rounded-[2rem] flex flex-col gap-6 trackable-link"
+            href="{{ link.url }}"
+            data-link-id="{{ link.id }}"
+            data-link-name="{{ link.name|escape }}"
+            data-link-url="{{ link.url|escape }}"
           >
+            <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
               <i class="text-4xl text-white drop-shadow-lg transition-all duration-500 filter brightness-110
-                      {% if link.category.name == "Instagram" %}
-                        fab fa-instagram
-                      {% elif link.category.name == "WhatsApp" %}
-                        fab fa-whatsapp
-                      {% elif link.category.name == "Site" %}
-                        fas fa-globe
-                      {% elif link.category.name == "Linkedin" %}
-                        fab fa-linkedin
-                      {% elif link.category.name == "YouTube" %}
-                        fab fa-youtube
-                      {% else %}
-                        fas fa-link
-                      {% endif %}
-                      "
-              ></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold mb-2">{{ link.name }}</h3>
-            <p class="text-base text-slate-400 leading-relaxed">
-              {{ link.description }}
-            </p>
-          </div>
-        </a>  
+                      {% if link.category.name == "Instagram" %}fab fa-instagram
+                      {% elif link.category.name == "WhatsApp" %}fab fa-whatsapp
+                      {% elif link.category.name == "Site" %}fas fa-globe
+                      {% elif link.category.name == "Linkedin" %}fab fa-linkedin
+                      {% elif link.category.name == "YouTube" %}fab fa-youtube
+                      {% else %}fas fa-link{% endif %}
+                      "></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">{{ link.name }}</h3>
+              <p class="text-base text-slate-400 leading-relaxed">{{ link.description }}</p>
+            </div>
+          </a>
         {% endfor %}
       </div>
     </main>
+    <script defer>
+      (function(){
+        const ENDPOINT = "{% url 'tenant.track_click' %}";
+        const TRACK_CLASS = 'trackable-link';
+
+        function buildPayload(el, ev) {
+          return {
+            timestamp: new Date().toISOString(),
+            link_id: el.dataset.linkId || null,
+            link_name: el.dataset.linkName || el.textContent.trim() || null,
+            link_url: el.dataset.linkUrl || el.href,
+            href_target: el.target || null,
+            viewport: { width: window.innerWidth, height: window.innerHeight },
+            user_agent: navigator.userAgent,
+            referrer: document.referrer || null,
+          };
+        }
+
+        function sendBeacon(payload) {
+          try {
+            const body = JSON.stringify(payload);
+            const blob = new Blob([body], { type: 'application/json' });
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon(ENDPOINT, blob);
+              return;
+            }
+            fetch(ENDPOINT, { method: 'POST', body, headers: { 'Content-Type': 'application/json' }, keepalive: true }).catch(()=>{});
+          } catch (err) { console.error('tracking send failed', err); }
+        }
+
+        document.addEventListener('click', function(e){
+          const el = e.target.closest && e.target.closest('a.' + TRACK_CLASS);
+
+          if (!el) return;
+
+          if (e.button !== 0) return;
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+          const payload = buildPayload(el, e);
+
+          sendBeacon(payload);
+        }, { passive: true });
+      })();
+    </script>
+
     <footer class="w-full flex flex-col items-center gap-8 pb-12 pt-20">
       <div
         class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/5 bg-white/5"
@@ -212,7 +247,7 @@
         <p
           class="text-[10px] text-slate-500 tracking-[0.2em] uppercase font-medium"
         >
-          Powered by
+          Feito Por
           <a class="text-slate-300 hover:text-white transition-colors" href="#"
             >{{ APP_NAME }}</a
           >
