@@ -49,6 +49,7 @@ def _persist_click(payload: Dict[str, Any], request) -> None:
     try:
         link_obj = None
         link_id = payload.get("link_id") if isinstance(payload, dict) else None
+        
         if link_id:
             link_obj = Link.objects.filter(pk=link_id).first()
 

@@ -128,9 +128,13 @@
       </div>
         <div>
             {% for emphasis_link in links_with_emphasis %}
-                    <a
-              class="group mb-8 glass-card block p-8 rounded-[2.5rem] relative overflow-hidden"
-              href="#"
+            <a
+              target="_blank"
+              class="group mb-8 glass-card block p-8 rounded-[2.5rem] relative overflow-hidden trackable-link"
+              href="{{ emphasis_link.url }}"
+              data-link-id="{{ emphasis_link.id }}"
+              data-link-name="{{ emphasis_link.name|escape }}"
+              data-link-url="{{ emphasis_link.url|escape }}"
             >
               <div
                 class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity"
@@ -225,7 +229,7 @@
           } catch (err) { console.error('tracking send failed', err); }
         }
 
-        document.addEventListener('click', function(e){
+        document.addEventListener('click', function(e) {
           const el = e.target.closest && e.target.closest('a.' + TRACK_CLASS);
 
           if (!el) return;
