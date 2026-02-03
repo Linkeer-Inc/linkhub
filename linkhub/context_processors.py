@@ -13,7 +13,7 @@ def tenant(request):
             "domain": domain,
             "links": links,
             "links_with_emphasis": links_with_emphasis,
-            "APP_NAME": "LinkHub"
+            "APP_NAME": "YourLink"
         }
     except:
         return {
