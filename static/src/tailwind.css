@@ -26,6 +26,14 @@
     transition: opacity 300ms ease-in-out;
   }
 
+  html.dark .moon-icon {
+    display: none;
+  }
+
+  html:not(.dark) .sun-icon {
+    display: none;
+  }
+
   .links-body {
     background:
       radial-gradient(

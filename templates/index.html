@@ -381,11 +381,12 @@
         title="Alternar tema (light/dark)"
         aria-label="Alternar tema"
       >
-        <span class="material-symbols-outlined text-3xl sun-icon duration-300"
+        <span
+          class="material-symbols-outlined text-3xl sun-icon duration-300 hidden dark:inline-flex"
           >light_mode</span
         >
         <span
-          class="material-symbols-outlined text-3xl moon-icon hidden duration-300"
+          class="material-symbols-outlined text-3xl moon-icon duration-300 inline-flex dark:hidden"
           >dark_mode</span
         >
       </button>
@@ -404,8 +405,6 @@
         const elements = {
           htmlElement: document.documentElement,
           toggleButton: document.getElementById("theme-toggle"),
-          sunIcon: document.querySelector(".sun-icon"),
-          moonIcon: document.querySelector(".moon-icon"),
         };
 
         const systemThemeQuery = window.matchMedia(
@@ -436,18 +435,6 @@
           elements.htmlElement.classList.toggle(CONFIG.darkClass, isDark);
         };
 
-        const updateIconsDisplay = () => {
-          const isDark = isDarkMode();
-
-          if (isDark) {
-            elements.sunIcon.classList.remove("hidden");
-            elements.moonIcon.classList.add("hidden");
-          } else {
-            elements.sunIcon.classList.add("hidden");
-            elements.moonIcon.classList.remove("hidden");
-          }
-        };
-
         const toggleTheme = () => {
           const newTheme = isDarkMode()
             ? CONFIG.themes.light
@@ -456,8 +443,6 @@
           applyTheme(newTheme);
 
           localStorage.setItem(CONFIG.storageKey, newTheme);
-
-          updateIconsDisplay();
         };
 
         const syncWithSystemPreference = (event) => {
@@ -467,7 +452,6 @@
               : CONFIG.themes.light;
 
             applyTheme(newTheme);
-            updateIconsDisplay();
           }
         };
 
@@ -475,7 +459,6 @@
           const theme = getThemeToApply();
 
           applyTheme(theme);
-          updateIconsDisplay();
 
           elements.toggleButton.addEventListener("click", toggleTheme);
           systemThemeQuery.addEventListener("change", syncWithSystemPreference);
