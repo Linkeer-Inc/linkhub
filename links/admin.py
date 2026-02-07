@@ -1,4 +1,6 @@
 import io
+import matplotlib
+
 from datetime import timedelta
 from zoneinfo import ZoneInfo
 
@@ -8,8 +10,6 @@ from django.db.models.functions import TruncDate
 from django.http import HttpResponse
 from django.utils import timezone
 
-import matplotlib
-matplotlib.use("Agg")
 from matplotlib import dates as mdates
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
@@ -18,6 +18,8 @@ from matplotlib import patches
 from .models import Link, LinkCategory, LinkClick
 
 from tenants.models import Tenant, TenantDomain
+
+matplotlib.use("Agg")
 
 PDF_BG_COLOR = "#f8fafc"
 PDF_HEADER_COLOR = "#1f2937"
