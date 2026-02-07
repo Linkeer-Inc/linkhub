@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+}
+
+@layer components {
+  .sun-icon,
+  .moon-icon {
+    transition: opacity 300ms ease-in-out;
+  }
+
+  .links-body {
+    background:
+      radial-gradient(
+        circle at top right,
+        var(--tenant-primary-color, #0f172a),
+        #0f172a
+      ),
+      linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #2e1065 100%);
+    background-attachment: fixed;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .feature-icon-glow {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+
+  .dynamic-links-container {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .dynamic-links-container:has(> :last-child:nth-child(1)) {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .dynamic-links-container:has(> :last-child:nth-child(2)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dynamic-links-container:has(> :last-child:nth-child(3)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dynamic-links-container:has(> :last-child:nth-child(3)) > :first-child {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 640px) {
+    .dynamic-links-container:has(> :last-child:nth-child(2)),
+    .dynamic-links-container:has(> :last-child:nth-child(3)) {
+      grid-template-columns: 1fr;
+    }
+
+    .dynamic-links-container:has(> :last-child:nth-child(3)) > :first-child {
+      grid-column: span 1;
+    }
+  }
+}

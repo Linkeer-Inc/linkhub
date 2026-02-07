@@ -3,3 +3,4 @@ python-dotenv==1.2.1
 django-tenants==3.9.0
 pillow==12.1.0
 psycopg2-binary
+matplotlib>=3.8

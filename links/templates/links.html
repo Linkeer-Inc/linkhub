@@ -1,10 +1,11 @@
+{% load static %}
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>{{ tenant.name }} - {{ APP_NAME }}</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -17,80 +18,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "premium-blue": "#0f172a",
-              "premium-violet": "#4c1d95",
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
-    <style type="text/tailwindcss">
-      body {
-        font-family: "Inter", sans-serif;
-        background:
-          radial-gradient(circle at top right, {{ tenant.primary_color }}, #0f172a),
-          linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #2e1065 100%);
-        background-attachment: fixed;
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .glass-card:hover {
-        background: rgba(255, 255, 255, 0.07);
-        border-color: rgba(255, 255, 255, 0.15);
-        transform: translateY(-4px);
-        box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
-      }
-      .feature-icon-glow {
-        box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-      }
-      .dynamic-links-container {
-        display: grid;
-        gap: 1.5rem;
-        width: 100%;
-      }
-      .dynamic-links-container:has(> :last-child:nth-child(1)) {
-        grid-template-columns: 1fr;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      .dynamic-links-container:has(> :last-child:nth-child(2)) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .dynamic-links-container:has(> :last-child:nth-child(3)) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .dynamic-links-container:has(> :last-child:nth-child(3)) > :first-child {
-        grid-column: span 2;
-      }
-      @media (max-width: 640px) {
-        .dynamic-links-container:has(> :last-child:nth-child(2)),
-        .dynamic-links-container:has(> :last-child:nth-child(3)) {
-          grid-template-columns: 1fr;
-        }
-        .dynamic-links-container:has(> :last-child:nth-child(3))
-          > :first-child {
-          grid-column: span 1;
-        }
-      }
-    </style>
   </head>
   <body
-    class="min-h-screen text-white flex flex-col items-center selection:bg-violet-500/30"
+    class="links-body min-h-screen text-white flex flex-col items-center selection:bg-violet-500/30"
+    style="--tenant-primary-color: {{ tenant.primary_color }};"
   >
     <header class="mt-16 mb-12 relative z-10">
       <div class="relative group">
@@ -130,6 +61,7 @@
             {% for emphasis_link in links_with_emphasis %}
             <a
               target="_blank"
+              rel="noopener noreferrer"
               class="group mb-8 glass-card block p-8 rounded-[2.5rem] relative overflow-hidden trackable-link"
               href="{{ emphasis_link.url }}"
               data-link-id="{{ emphasis_link.id }}"
@@ -175,6 +107,7 @@
         {% for link in links %}
           <a
             target="_blank"
+            rel="noopener noreferrer"
             class="group glass-card p-8 rounded-[2rem] flex flex-col gap-6 trackable-link"
             href="{{ link.url }}"
             data-link-id="{{ link.id }}"

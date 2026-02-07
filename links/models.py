@@ -5,11 +5,9 @@ from django.db import models
 
 from tenants.models import TenantDomain
 
-
 class ActiveLinksManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_active=True)
-
 
 class LinkCategory(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -17,7 +15,6 @@ class LinkCategory(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
 
 class Link(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -41,7 +38,6 @@ class Link(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
 
 class LinkClick(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
