@@ -13,10 +13,11 @@ def tenant(request):
             "domain": domain,
             "links": links,
             "links_with_emphasis": links_with_emphasis,
-            "APP_NAME": "YourLink",
+            "APP_NAME": "YourLinks",
             "APP_URL": environ.get('BASE_URL', 'localhost:8000')
         }
     except:
         return {
+          "APP_NAME": "YourLinks",
           "APP_URL": environ.get('BASE_URL', 'localhost:8000')
         }
