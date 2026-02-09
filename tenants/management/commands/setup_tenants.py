@@ -6,12 +6,13 @@ from os import environ
 
 class Command(BaseCommand):
     help = 'Popula o banco de dados com dados iniciais'
+    host = environ.get('HOST', 'localhost')
 
     def handle(self, *args, **options):    
         try:        
             primaryTenant, isPrimaryTenantCreated = Tenant.objects.get_or_create(
                 schema_name="public",
-                name=environ.get('HOST', 'localhost'),
+                name=self.host,
                 is_primary=True
             )
 
@@ -20,7 +21,7 @@ class Command(BaseCommand):
             
             _, isPrimaryTenantDomainCreated = TenantDomain.objects.get_or_create(
                 tenant_id=primaryTenant.id,
-                domain="localhost"
+                domain=self.host
             )
 
             if not isPrimaryTenantDomainCreated:
