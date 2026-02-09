@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 
 from tenants.models import Tenant, TenantDomain
 
+from os import environ
+
 class Command(BaseCommand):
     help = 'Popula o banco de dados com dados iniciais'
 
@@ -9,7 +11,7 @@ class Command(BaseCommand):
         try:        
             primaryTenant, isPrimaryTenantCreated = Tenant.objects.get_or_create(
                 schema_name="public",
-                name="localhost",
+                name=environ.get('HOST', 'localhost'),
                 is_primary=True
             )
 
