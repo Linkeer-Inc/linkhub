@@ -17,7 +17,6 @@ RUN apt-get update -q -y && apt-get install -y \
     curl \
     git \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash \
-    && nvm install
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash
 
 EXPOSE 8000
