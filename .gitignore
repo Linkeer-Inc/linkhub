@@ -2,7 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,venv
 
 node_modules
-static/css
+staticfiles
+static
 
 ### Django ###
 storage/

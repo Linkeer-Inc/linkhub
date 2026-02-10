@@ -28,7 +28,7 @@ if not is_env_loaded:
 SECRET_KEY = 'django-insecure-pbo)o^&tlurwel2&37b@j(#*^fv-sq8lp7(xj^xvmjh^9hxd_^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False) == 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 

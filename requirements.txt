@@ -4,3 +4,4 @@ django-tenants==3.9.0
 pillow==12.1.0
 psycopg2-binary
 matplotlib>=3.8
+gunicorn==25.0.3
