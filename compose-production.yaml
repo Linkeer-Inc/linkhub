@@ -20,7 +20,7 @@ services:
       - .:/app
       - gunicorn_socket:/run
     ports:
-      - "80:80"
+      - "8000:80"
     networks:
       - app
   app:
@@ -33,7 +33,7 @@ services:
     volumes:
       - gunicorn_socket:/run
     ports:
-      - "8000:8000"
+      - "8001:8000"
     networks:
       - app
     depends_on:
