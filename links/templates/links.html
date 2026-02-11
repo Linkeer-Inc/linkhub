@@ -47,12 +47,12 @@
     <main class="max-w-[800px] w-full px-6 flex-grow flex flex-col">
       <div class="text-center mb-14">
         <h1
-          class="text-4xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400"
+          class="text-4xl font-bold tracking-tight mb-4 text-white"
         >
           {{ tenant.name }}
         </h1>
         <p
-          class="text-slate-400 text-lg font-light max-w-lg mx-auto leading-relaxed"
+          class="text-white text-lg font-light max-w-lg mx-auto leading-relaxed"
         >
           {{ tenant.description }}
         </p>
@@ -61,7 +61,6 @@
             {% for emphasis_link in links_with_emphasis %}
             <a
               target="_blank"
-              rel="noopener noreferrer"
               class="group mb-8 glass-card block p-8 rounded-[2.5rem] relative overflow-hidden trackable-link"
               href="{{ emphasis_link.url }}"
               data-link-id="{{ emphasis_link.id }}"
@@ -126,7 +125,7 @@
             </div>
             <div>
               <h3 class="text-xl font-semibold mb-2">{{ link.name }}</h3>
-              <p class="text-base text-slate-400 leading-relaxed">{{ link.description }}</p>
+              <p class="text-base text-slate-200">{{ link.description }}</p>
             </div>
           </a>
         {% endfor %}
