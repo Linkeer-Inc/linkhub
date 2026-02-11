@@ -19,5 +19,6 @@ def tenant(request):
     except:
         return {
           "APP_NAME": "YourLinks",
-          "APP_URL": environ.get('BASE_URL', 'localhost:8000')
+          "APP_URL": environ.get('BASE_URL', 'localhost:8000'),
+          "VIEW_DEMONSTRATION_URL": environ.get('VIEW_DEMONSTRATION_URL', 'localhost:8000')
         }
