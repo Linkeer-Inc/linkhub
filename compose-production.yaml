@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: "${DB_USERNAME}"
       POSTGRES_PASSWORD: "${DB_PASSWORD}"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     ports:
       - "5432:5432"
     networks:
@@ -69,7 +69,12 @@ networks:
 
 volumes:
   postgres_data:
+    driver: local
   gunicorn_socket:
+    driver: local
   certbot_etc:
+    driver: local
   certbot_var:
+    driver: local
   certbot_web:
+    driver: local
