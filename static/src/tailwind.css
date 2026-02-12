@@ -5,6 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 14px;
   }
 
   body {
@@ -90,6 +91,11 @@
   }
 
   @media (max-width: 640px) {
+    html,
+    body {
+      font-size: 13px !important;
+    }
+
     .dynamic-links-container:has(> :last-child:nth-child(2)),
     .dynamic-links-container:has(> :last-child:nth-child(3)) {
       grid-template-columns: 1fr;

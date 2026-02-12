@@ -13,6 +13,7 @@ class Command(BaseCommand):
                 LinkCategory(name="Site"),
                 LinkCategory(name="Linkedin"),
                 LinkCategory(name="YouTube"),
+                LinkCategory(name="Localização"),
                 LinkCategory(name="Outros"),
             ]
 

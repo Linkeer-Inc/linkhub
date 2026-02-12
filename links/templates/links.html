@@ -14,10 +14,15 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-     <link
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+  <style>
+    html, body {
+      font-size: 14px!important;
+    }
+  </style>
   </head>
   <body
     class="links-body min-h-screen text-white flex flex-col items-center selection:bg-violet-500/30"
@@ -57,7 +62,7 @@
           {{ tenant.description }}
         </p>
       </div>
-        <div>
+        <div class="w-full">
             {% for emphasis_link in links_with_emphasis %}
             <a
               target="_blank"
@@ -78,9 +83,15 @@
                 <div
                   class="p-5 rounded-3xl bg-violet-600/20 text-violet-400 feature-icon-glow border border-violet-500/20"
                 >
-                  <span class="material-symbols-outlined text-5xl"
-                    >rocket_launch</span
-                  >
+                     <i class="text-4xl drop-shadow-lg transition-all duration-500 filter brightness-110
+                      {% if link.category.name == "Instagram" %}fab fa-instagram
+                      {% elif emphasis_link.category.name == "WhatsApp" %}fab fa-whatsapp
+                      {% elif emphasis_link.category.name == "Site" %}fas fa-globe
+                      {% elif emphasis_link.category.name == "Linkedin" %}fab fa-linkedin
+                      {% elif emphasis_link.category.name == "Localização" %}fab fa-location
+                      {% elif emphasis_link.category.name == "YouTube" %}fab fa-youtube
+                      {% else %}fas fa-link{% endif %}
+                      "></i>
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
@@ -106,7 +117,6 @@
         {% for link in links %}
           <a
             target="_blank"
-            rel="noopener noreferrer"
             class="group glass-card p-8 rounded-[2rem] flex flex-col gap-6 trackable-link"
             href="{{ link.url }}"
             data-link-id="{{ link.id }}"
@@ -119,6 +129,7 @@
                       {% elif link.category.name == "WhatsApp" %}fab fa-whatsapp
                       {% elif link.category.name == "Site" %}fas fa-globe
                       {% elif link.category.name == "Linkedin" %}fab fa-linkedin
+                      {% elif link.category.name == "Localização" %}fa-solid fa-location-dot
                       {% elif link.category.name == "YouTube" %}fab fa-youtube
                       {% else %}fas fa-link{% endif %}
                       "></i>
@@ -175,20 +186,51 @@
         }, { passive: true });
       })();
     </script>
-
     <footer class="w-full flex flex-col items-center gap-8 pb-12 pt-20">
+      <div class="flex justify-center items-center">
+          <button class="rounded-full flex items-center justify-center border border-gray-700 h-14 w-14 share-button">
+            <span class="material-symbols-outlined">
+                share
+            </span>
+          </button>
+      </div>
       <div
         class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/5 bg-white/5"
       >
         <p
           class="text-[10px] text-slate-500 tracking-[0.2em] uppercase font-medium"
         >
-          Feito Por
-          <a class="text-slate-300 hover:text-white transition-colors" href="#"
+         Feito Por
+          <a href="{{ APP_URL }}" class="text-slate-300 hover:text-white transition-colors"
             >{{ APP_NAME }}</a
           >
         </p>
       </div>
     </footer>
   </body>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer>
+    const btn = document.querySelector(".share-button");
+    const link = window.location.origin;
+
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(link);
+
+        await Swal.fire({
+          title: "",
+          theme: "auto",
+          text: "Link copiado com sucesso",
+          icon: "success"
+        });
+      } catch (err) {
+        await Swal.fire({
+          title: "",
+          theme: "auto",
+          text: "Um erro desconhecido ocorreu ao tentar copiar o link, contate o suporte.",
+          icon: "error"
+        });
+      }
+    });
+  </script>
 </html>
