@@ -32,7 +32,7 @@ services:
       context: .
     env_file:
       - .env
-    command: "python3 manage.py runserver 0.0.0.0:8000"
+    command: "gunicorn linkhub.wsgi:application --reload --bind unix:/run/gunicorn.sock"
     volumes:
       - .:/app
     ports:
