@@ -1,15 +1,24 @@
-FROM python:3.14.2-slim
+FROM python:3.14.3-slim
 
 WORKDIR /app
+
+RUN groupadd --system --gid 10001 appgroup && \
+    useradd  --system --uid 10001 --gid appgroup \
+    --no-create-home --shell /sbin/nologin appuser \
+    && mkdir -p /run/app \
+    && touch /run/app/gunicorn.sock \
+    && chown -R appuser:appgroup /run/app/gunicorn.sock
 
 RUN apt-get update && apt-get install -y \
     postgresql-client \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . .
+COPY --chown=appuser:appgroup . .
 
 RUN pip install --no-cache-dir -r requirements.txt \
-    && python3 manage.py collectstatic --noinput
+    && python3 manage.py collectstatic --noinput 
 
 EXPOSE 8000
+
+USER appuser

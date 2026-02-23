@@ -22,7 +22,7 @@ class Tenant(TenantMixin):
         editable=False
     )
     name = models.CharField(max_length=100,unique=True)
-    description = models.CharField(max_length=100,null=True)
+    description = models.CharField(max_length=255,null=True)
     is_active = models.BooleanField(default=True)
     is_primary = models.BooleanField(default=False)
     created_on = models.DateField(auto_now_add=True)

@@ -4,7 +4,7 @@ import matplotlib
 from datetime import timedelta
 from zoneinfo import ZoneInfo
 
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.db.models import Count, Max, Min
 from django.db.models.functions import TruncDate
 from django.http import HttpResponse

@@ -21,7 +21,7 @@ class Link(models.Model):
     domain = models.ForeignKey(TenantDomain, on_delete=models.PROTECT, related_name="links")
     category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE, null=True, related_name="category")
     name = models.CharField(max_length=100, unique=True)
-    description = models.CharField(max_length=100, blank=True, default="")
+    description = models.CharField(max_length=255, blank=True, default="")
     url = models.URLField()
     is_active = models.BooleanField(default=True)
     exibition_order = models.PositiveBigIntegerField(validators=[MinValueValidator(1)])
