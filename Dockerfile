@@ -4,10 +4,7 @@ WORKDIR /app
 
 RUN groupadd --system --gid 10001 appgroup && \
     useradd  --system --uid 10001 --gid appgroup \
-    --no-create-home --shell /sbin/nologin appuser \
-    && mkdir -p /run/app \
-    && touch /run/app/gunicorn.sock \
-    && chown -R appuser:appgroup /run/app/gunicorn.sock
+    --no-create-home --shell /sbin/nologin appuser 
 
 RUN apt-get update && apt-get install -y \
     postgresql-client \
