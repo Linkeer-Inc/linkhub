@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-pbo)o^&tlurwel2&37b@j(#*^fv-sq8lp7(xj^xvmjh^9hxd_^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['.youtlinks.com.br', 'yourlinks.com.br', 'localhost', '.localhost']
+ALLOWED_HOSTS = ['.yourlinks.com.br', 'yourlinks.com.br', 'localhost', '.localhost']
 
 # Application definition
 
