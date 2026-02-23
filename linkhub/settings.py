@@ -32,6 +32,11 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['.yourlinks.com.br', 'yourlinks.com.br', 'localhost', '.localhost']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://yourlinks.com.br",
+    "http://yourlinks.localhost"
+]
+
 # Application definition
 
 SHARED_APPS = [
