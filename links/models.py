@@ -20,7 +20,7 @@ class Link(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     domain = models.ForeignKey(TenantDomain, on_delete=models.PROTECT, related_name="links")
     category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE, null=True, related_name="category")
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     description = models.CharField(max_length=255, blank=True, default="")
     url = models.URLField()
     is_active = models.BooleanField(default=True)
@@ -33,7 +33,8 @@ class Link(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["domain", "exibition_order"], name="unique_exibition_order_per_domain")
+            models.UniqueConstraint(fields=["domain", "exibition_order"], name="unique_exibition_order_per_domain"),
+            models.UniqueConstraint(fields=["domain", "name"], name="unique_link_name_per_domain"),
         ]
 
     def __str__(self) -> str:
