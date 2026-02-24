@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
 COPY --chown=appuser:appgroup . .
 
 RUN pip install --no-cache-dir -r requirements.txt \
-    && python3 manage.py collectstatic --noinput 
+    && python3 manage.py collectstatic --noinput \
+    && chown -R appuser:appgroup /app/storage/ \
+    && chmod -R 644 /app/storage 
 
 EXPOSE 8000
 
