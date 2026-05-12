@@ -58,7 +58,7 @@ services:
   certbot:
     image: certbot/certbot:latest
     container_name: linkeer-certbot
-    command: sleep infinity
+    entrypoint: sleep infinity
     volumes:
       - certbot_etc:/etc/letsencrypt
       - certbot_var:/var/lib/letsencrypt
