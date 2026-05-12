@@ -22,7 +22,7 @@ services:
       - certbot_etc:/etc/letsencrypt
       - certbot_var:/var/lib/letsencrypt
       - certbot_web:/var/www/certbot
-    ports: 
+    ports:
       - "80:80"
       - "443:443"
     networks:
@@ -64,15 +64,6 @@ services:
       - certbot_web:/var/www/certbot
     depends_on:
       - web
-    command: >
-      certonly --webroot
-      --webroot-path=/var/www/certbot
-      --email seu-email@dominio.com
-      --agree-tos
-      --no-eff-email
-      -d seu-dominio.com
-      -d www.seu-dominio.com
-
 networks:
   app:
 
