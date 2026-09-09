@@ -163,6 +163,12 @@ DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
 
+LOG_DIR = BASE_DIR / 'logs'
+IS_VERCEL = bool(os.getenv('VERCEL'))
+
+if not IS_VERCEL:
+    LOG_DIR.mkdir(exist_ok=True)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -193,15 +199,18 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'production.log',
-            'formatter': 'verbose',
-        },
     },
     'root': {
-        'handlers': ['console_debug_false', 'console_debug_true', 'file'],
+        'handlers': ['console_debug_false', 'console_debug_true'],
         'level': 'DEBUG',
     },
 }
+
+if not IS_VERCEL:
+    LOGGING['handlers']['file'] = {
+        'level': 'INFO',
+        'class': 'logging.FileHandler',
+        'filename': LOG_DIR / 'production.log',
+        'formatter': 'verbose',
+    }
+    LOGGING['root']['handlers'].append('file')
