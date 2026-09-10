@@ -27,11 +27,12 @@ SECRET_KEY = 'django-insecure-pbo)o^&tlurwel2&37b@j(#*^fv-sq8lp7(xj^xvmjh^9hxd_^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['.yourlinks.com.br', 'yourlinks.com.br', 'localhost', '.localhost']
+ALLOWED_HOSTS = ['.yourlinks.com.br', 'yourlinks.com.br', 'localhost', '.localhost', '.vercel.app']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://yourlinks.com.br",
-    "http://yourlinks.localhost"
+    "http://yourlinks.localhost",
+    "https://*.vercel.app",
 ]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
