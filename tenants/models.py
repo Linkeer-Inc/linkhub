@@ -13,7 +13,7 @@ class TenantDomain(DomainMixin):
     is_primary = models.BooleanField(default=False)
 
 def tenant_branding_upload_to(instance, filename):
-    return f"tenants/{instance.id}/branding/{filename}"
+    return f"{instance.id}/branding/{filename}"
 
 class Tenant(TenantMixin):
     id = models.UUIDField(

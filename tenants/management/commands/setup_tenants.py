@@ -6,7 +6,7 @@ from os import environ
 
 class Command(BaseCommand):
     help = 'Popula o banco de dados com dados iniciais'
-    host = environ.get('HOST', 'localhost')
+    host = environ.get('HOST', 'yourlinks.localhost')
 
     def handle(self, *args, **options):    
         try:        

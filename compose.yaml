@@ -36,8 +36,6 @@ services:
       - .env
     command: >
       gunicorn linkhub.wsgi:application
-        --user appuser
-        --group appgroup
         --bind 0.0.0.0:8000
     tmpfs:
       - /tmp:noexec,nosuid,size=100m
