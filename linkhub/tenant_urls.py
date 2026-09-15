@@ -20,9 +20,12 @@ from django.conf.urls.static import static
 
 import links.views as tenantViews
 
+import linkhub.views as views
+
 urlpatterns = [
     path('', view=tenantViews.links, name='tenant.links'),
     path('track-click/', view=tenantViews.track_click, name='tenant.track_click'),
+    path("blob/<path:pathname>/", views.serve_private_blob, name="serve_private_blob"),
 ]
 
 if settings.DEBUG:

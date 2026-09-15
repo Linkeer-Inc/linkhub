@@ -21,7 +21,10 @@ from django.urls import path
 
 from .views import landing_page
 
+import linkhub.views as views
+
 urlpatterns = [
+    path("blob/<path:pathname>/", views.serve_private_blob, name="serve_private_blob"),
     path('admin/', admin.site.urls),
     path('', landing_page)
 ]

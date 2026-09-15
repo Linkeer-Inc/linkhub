@@ -1,6 +1,8 @@
 from django.core.files.storage import Storage
-from vercel.blob import delete, head, put
+from vercel.blob import delete, head, put, get
 from django.conf import settings
+
+from django.urls import reverse
 
 class VercelBlobStorage(Storage):
 
@@ -26,4 +28,4 @@ class VercelBlobStorage(Storage):
         delete(name)
 
     def url(self, name):
-        return f"{settings.VERCEL_BLOB_BASE_URL}/{name}"
+        return reverse("serve_private_blob", kwargs={"pathname": name})

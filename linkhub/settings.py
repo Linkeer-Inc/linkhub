@@ -149,7 +149,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = '/storage/'
+MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'storage')
 
@@ -179,8 +179,6 @@ AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = None
 
 AWS_S3_FILE_OVERWRITE = False
-
-VERCEL_BLOB_BASE_URL = os.environ.get('VERCEL_BLOB_BASE_URL', '')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
