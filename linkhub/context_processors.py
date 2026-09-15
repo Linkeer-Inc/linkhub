@@ -18,7 +18,8 @@ def tenant(request):
             "APP_NAME": "YourLinks",
             "APP_URL": environ.get('BASE_URL', 'localhost:8000')
         }
-    except:
+    except Exception as e:
+        print(f"Error in tenant context processor: {e}")
         return {
           "APP_NAME": "YourLinks",
           "APP_URL": environ.get('BASE_URL', 'localhost:8000'),
