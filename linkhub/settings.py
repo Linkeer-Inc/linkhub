@@ -180,6 +180,8 @@ AWS_DEFAULT_ACL = None
 
 AWS_S3_FILE_OVERWRITE = False
 
+VERCEL_BLOB_BASE_URL = os.environ.get('VERCEL_BLOB_BASE_URL', '')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

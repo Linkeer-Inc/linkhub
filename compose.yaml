@@ -34,9 +34,7 @@ services:
       - .:/app
     env_file:
       - .env
-    command: >
-      gunicorn linkhub.wsgi:application
-        --bind 0.0.0.0:8000
+    command: sleep infinity
     tmpfs:
       - /tmp:noexec,nosuid,size=100m
     security_opt:

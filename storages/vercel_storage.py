@@ -26,5 +26,4 @@ class VercelBlobStorage(Storage):
         delete(name)
 
     def url(self, name):
-        print(f"URL: {settings.VERCEL_BLOB_BASE_URL}/{name}")
         return f"{settings.VERCEL_BLOB_BASE_URL}/{name}"
